@@ -16,9 +16,9 @@ namespace WpfBasicApp02
     /// 이곳은 ,, 디자이너의 영역일세
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainView : MetroWindow
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
         }

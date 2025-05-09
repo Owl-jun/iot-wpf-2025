@@ -71,6 +71,14 @@ IoT 개발자 WPF 학습리포지토리
 
     <img src="./img/wpf0003.png" width=600>
 
+- MVVM 장단점
+    - View <-> ViewModel 간 데이터 자동 연동
+    - 로직 분리로 구조가 명확해짐
+    - 팀으로 개발시 역할분담이 확실, 팀프로젝트에 알맞음
+    - 테스트와 유지보수는 쉬움
+    - 구조가 복잡. 디버깅이 어려움
+    - 스케일이 커짐
+
 ### WPF MVVM 연습
 1. 프로젝트 생성 - [디자인](./day01/Day01Wpf/WpfBasicApp02/View/MainWindow.xaml) [소스](./day01/Day01Wpf/WpfBasicApp02/ViewModel/MainViewModel.cs)
 2. PF DB바인딩 연습시 사용한 UI 복사
@@ -80,8 +88,70 @@ IoT 개발자 WPF 학습리포지토리
 6. Model 폴더 내 Book클래스 생성
     - INotifyPropertyChanged 인터페이스 : 객체내의 어떠한 속성값이 변경되면 상태를 프로세스에게 알려주는 기능
 7. ViewModel폴더 내 MainViewModel클래스 생성
+    - INotifyPropertyChanged 인터페이스 구현
+    - OnPropertyChange 이벤트 핸들러 메서드 코딩
+8. MainView.xaml에 ViewModel 연결
+    ```xml
+    ...
+    xmlns:vm="clr-namespace:WpfBasicApp02.ViewModel"
+    DataContext="{DynamicResource MainVM}"
+    ...
+    <mah:MetroWindow.Resources>
+        <vm:MainViewModel x:Key="MainVM" />
+    </mah:MetroWindow.Resources>
+    ```
+9. MainView.xaml 컨트롤에 바인딩 작업
+    - 전통적인 C# 방식 : x:Name 으로 이름 할당 후 이벤트 기반
+    ```xml
+    <!-- UI 컨트롤 구성 -->
+    <DataGrid x:Name="GrdBooks" 
+            Grid.Row="0" Grid.Column="0" Margin="5" 
+            AutoGenerateColumns="False" IsReadOnly="True" 
+            MouseDoubleClick="GrdBooks_MouseDoubleClick">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Idx}" Header="순번" />
+            ...
+    ```
+
+    - WPF + MVVM 바인딩 방식 : ViewModel 이 중계자로서 변화감지, 비동기 느낌의 흐름
+    ```xml
+    <!-- UI 컨트롤 구성 -->
+    <DataGrid Grid.Row="0" Grid.Column="0" Margin="5" 
+            AutoGenerateColumns="False" IsReadOnly="True"
+            ItemsSource="{Binding Books}"
+            SelectedItem="{Binding SelectedBook, Mode=TwoWay}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Idx}" Header="순번" />
+            ...
+    ```
+
+10. 실행결과
+
+    <img src="./img/wpf0005.png" width = 600>
 
 ## 2일차
+
+### MVVM Framework
+- MVVM 개발을 시작하는데 필요한 틀을 짜는데 시간이 많이 소요되며 복잡하다.
+- 이를 해소하기 위해 3rd Party 에서 개발한 MVVM 프레임워크 사용
+- 종류
+    - Prism : MS계열에서 직접 개발. 대규모 앱 개발시 사용. 모듈화 잘 되어 있음. 커뮤니티 활발
+        - 진입장벽 높음
+    - Caliburn.Micro : 경량화된 프레임워크, 쉽게 개발할 수 있음. Xaml 바인딩 생략가능. 커뮤니티 줄어드는 추세
+        - MahApps.Metro에서 사용 중
+        - 디버깅이 어려움
+    - MVVM Light Toolkit : 가장 가벼운 MVVM 입문용, 쉬운 Command 지원, 개발종료.
+        - 확장성이 떨어짐
+    - CommunityToolkit.Mvvm : MS 공식 경량 MVVM. 단순, 빠름. 커뮤니티등 매우 활발
+        - 모듈기능이 없음
+    - ReactiveUI : Rx 기반 MVVM, 비동기, 스트림처리 강력. 커뮤니티 활발
+        - 진입장벽 높음
+
+### Caliburn.Micro
+- [공식사이트](https://caliburnmicro.com/)
+- [깃허브](https://github.com/Caliburn-Micro/Caliburn.Micro)
+
+### Caliburn.Micro 학습
 
 ## 3일차
 

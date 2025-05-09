@@ -1,16 +1,34 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WpfBasicApp02.Model;
+using static System.Reflection.Metadata.BlobBuilder;
 namespace WpfBasicApp02.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        public ObservableCollection<Book> Books { get; set; } = new ObservableCollection<Book>();
+        public ObservableCollection<KeyValuePair<string,string>> Divisions { get; set; }
+
+        private Book _selectedBook;
+        
+        public Book SelectedBook
+        {
+            get => _selectedBook;
+            set
+            {
+                _selectedBook = value;
+                OnPropertyChanged(nameof(SelectedBook));
+                
+            }
+        }
+
         public MainViewModel() {
             LoadControlFromDb();
             LoadGridFromDb();
@@ -20,7 +38,7 @@ namespace WpfBasicApp02.ViewModel
             string connStr = "Server=localhost;Database=bookrentalshop;Uid=root;Pwd=root;Charset=utf8;";
             string query = "SELECT division, names FROM divtbl";
 
-            List<KeyValuePair<string, string>> divisions = new List<KeyValuePair<string, string>>();
+            ObservableCollection<KeyValuePair<string,string>> divisions = new ObservableCollection<KeyValuePair<string, string>>();
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
@@ -43,6 +61,8 @@ namespace WpfBasicApp02.ViewModel
                     System.Console.WriteLine(ex.Message);
                 }
             }
+            Divisions = divisions;
+            OnPropertyChanged(nameof(Divisions));
         }
 
         private void LoadGridFromDb()
@@ -62,8 +82,22 @@ namespace WpfBasicApp02.ViewModel
                     MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
-
-                    GrdBooks.ItemsSource = dt.DefaultView;
+                    
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        Books.Add(new Book
+                        {
+                            Idx = Convert.ToInt32(dr["Idx"]),
+                            Division = Convert.ToString(dr["Division"]),
+                            DNames = Convert.ToString(dr["dNames"]),
+                            Names = Convert.ToString(dr["Names"]),
+                            Author = Convert.ToString(dr["Author"]),
+                            ISBN = Convert.ToString(dr["ISBN"]),
+                            ReleaseDate = Convert.ToDateTime(dr["ReleaseDate"]),
+                            Price = Convert.ToInt32(dr["Price"])
+                        });
+                    }
+                    OnPropertyChanged(nameof(Books));
                 }
                 catch (MySqlException ex)
                 {
@@ -74,5 +108,10 @@ namespace WpfBasicApp02.ViewModel
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }
