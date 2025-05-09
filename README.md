@@ -152,6 +152,29 @@ IoT 개발자 WPF 학습리포지토리
 - [깃허브](https://github.com/Caliburn-Micro/Caliburn.Micro)
 
 ### Caliburn.Micro 학습
+1. WPF 프로젝트 생성
+2. NuGet 패키지 Caliburn.Micro 설치
+3. App.xaml StartupUri를 삭제 - [소스](./day02/Day02Wpf/WpfBasicApp01/App.xaml)
+4. Models, Views, ViewModels 폴더 생성
+5. MainViewModel 클래스 생성 - [소스](./day02/Day02Wpf/WpfBasicApp01/ViewModels/MainViewModel.cs)
+     - MainView
+     - MainViewModel 과 같이 네이밍 규칙이 엄격함.
+6. MainWindow.xaml을 View로 이동
+7. MainWindow.xaml을 View 이동
+8. Bootstrapper 클래스 생성, 작성 - [소스](./day02/Day02Wpf/WpfBasicApp01/Bootstrapper.cs)
+9. App.xaml에서 Resource 추가
+10. MahApps.Metro UI 적용
+
+    <img src="./img/wpf0006.png" width=600>
+
+
+### Caliburn.Micro MVVM 연습
+1. WPF 프로젝트 생성 - [소스](./day02/Day02Wpf/WpfBasicApp02/ViewModels/MainViewModel.cs)
+2. 필요 라이브러리 설치
+3. Models, Views, ViewModels로 폴더 생성
+4. 이전작업 소스코드 복사, 네임스페이스 변경
+
+    <img src="./img/wpf0007.png" width=600>
 
 ## 3일차
 

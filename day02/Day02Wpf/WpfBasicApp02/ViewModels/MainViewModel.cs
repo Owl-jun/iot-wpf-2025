@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Caliburn.Micro;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,29 +8,60 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfBasicApp02.Model;
+using System.Net;
+using WpfBasicApp02.Models;
 using static System.Reflection.Metadata.BlobBuilder;
-namespace WpfBasicApp02.ViewModel
+using System.Net.Sockets;
+using MahApps.Metro.Controls.Dialogs;
+namespace WpfBasicApp02.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : Conductor<object>
     {
+        private readonly IDialogCoordinator _dialogCoordinator; // msg박스, 다이얼로그 실행을 위한 방식
+        public ObservableCollection<KeyValuePair<string, string>> Divisions {  get; set; }
         public ObservableCollection<Book> Books { get; set; } = new ObservableCollection<Book>();
-        public ObservableCollection<KeyValuePair<string,string>> Divisions { get; set; }
 
         private Book _selectedBook;
-        
+
         public Book SelectedBook
         {
             get => _selectedBook;
             set
             {
                 _selectedBook = value;
-                OnPropertyChanged(nameof(SelectedBook));
-                
+                NotifyOfPropertyChange(() => SelectedBook);
             }
         }
 
-        public MainViewModel() {
+        private string NetTest()
+        {
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            socket.Connect("127.0.0.1", 9000);
+
+            const string Value = "CHAT 박관호 반갑습니다.\n";
+            byte[] msg = Encoding.UTF8.GetBytes(Value);
+            socket.Send(msg);
+
+            // 응답 받기
+            byte[] buffer = new byte[1024];
+            int receivedLength = socket.Receive(buffer);
+            string receivedText = Encoding.UTF8.GetString(buffer, 0, receivedLength);
+            Console.WriteLine($"받은 메시지: {receivedText}");
+
+            socket.Close();
+            return receivedText;
+        }
+
+        public async void DoAction()
+        {
+            string msg = NetTest();
+            System.Console.WriteLine(msg);
+            //await _dialogCoordinator.ShowMessageAsync(this,"서버통신 결과", msg);
+        }
+
+
+        public MainViewModel()
+        {
             LoadControlFromDb();
             LoadGridFromDb();
         }
@@ -39,7 +71,7 @@ namespace WpfBasicApp02.ViewModel
             string connStr = "Server=localhost;Database=bookrentalshop;Uid=root;Pwd=root;Charset=utf8;";
             string query = "SELECT division, names FROM divtbl";
 
-            ObservableCollection<KeyValuePair<string,string>> divisions = new ObservableCollection<KeyValuePair<string, string>>();
+            ObservableCollection<KeyValuePair<string, string>> divisions = new ObservableCollection<KeyValuePair<string, string>>();
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
@@ -63,7 +95,7 @@ namespace WpfBasicApp02.ViewModel
                 }
             }
             Divisions = divisions;
-            OnPropertyChanged(nameof(Divisions));
+            NotifyOfPropertyChange(() => Divisions);
         }
 
         private void LoadGridFromDb()
@@ -83,7 +115,6 @@ namespace WpfBasicApp02.ViewModel
                     MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
-                    
                     foreach (DataRow dr in dt.Rows)
                     {
                         Books.Add(new Book
@@ -98,21 +129,13 @@ namespace WpfBasicApp02.ViewModel
                             Price = Convert.ToInt32(dr["Price"])
                         });
                     }
-                    OnPropertyChanged(nameof(Books));
                 }
                 catch (MySqlException ex)
                 {
                     System.Console.WriteLine(ex.Message);
                 }
             }
-        }
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            NotifyOfPropertyChange(() => Books);
         }
     }
 }

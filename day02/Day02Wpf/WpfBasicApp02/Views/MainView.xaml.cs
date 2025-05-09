@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfBasicApp02.View
+namespace WpfBasicApp02.Views
 {
     /// <summary>
     /// 이곳은 ,, 디자이너의 영역일세
