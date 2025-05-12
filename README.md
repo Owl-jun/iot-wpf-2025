@@ -235,6 +235,8 @@ IoT 개발자 WPF 학습리포지토리
 
     <img src="./img/wpf0010.png" width=650>
 
+    https://github.com/user-attachments/assets/db1f788e-e9a8-4f0c-98ec-41ec5029b5bb
+
 
 ## 4일차
 
