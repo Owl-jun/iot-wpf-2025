@@ -140,9 +140,10 @@ IoT 개발자 WPF 학습리포지토리
     - Caliburn.Micro : 경량화된 프레임워크, 쉽게 개발할 수 있음. Xaml 바인딩 생략가능. 커뮤니티 줄어드는 추세
         - MahApps.Metro에서 사용 중
         - 디버깅이 어려움
+        - 다이얼로그 구현 이슈
     - MVVM Light Toolkit : 가장 가벼운 MVVM 입문용, 쉬운 Command 지원, 개발종료.
         - 확장성이 떨어짐
-    - CommunityToolkit.Mvvm : MS 공식 경량 MVVM. 단순, 빠름. 커뮤니티등 매우 활발
+    - **CommunityToolkit.Mvvm** : MS 공식 경량 MVVM. 단순, 빠름. 커뮤니티등 매우 활발
         - 모듈기능이 없음
     - ReactiveUI : Rx 기반 MVVM, 비동기, 스트림처리 강력. 커뮤니티 활발
         - 진입장벽 높음
@@ -178,3 +179,72 @@ IoT 개발자 WPF 학습리포지토리
 
 ## 3일차
 
+### CommunityToolkit.Mvvm 다시
+1. Wpf프로젝트 생성
+2. 필요 라이브러리 설치
+    - CommunityToolkit.Mvvm
+    - MahApps.Metro
+    - MahApps.IconPacks
+
+3. Models, Views, ViewModels 폴더 생성
+4. MainWindow.xaml 삭제
+5. App.xaml StartupUri 도 삭제
+6. View/MainView.xaml 생성
+7. ViewModels/MainViewModel.cs 생성
+
+    <img src="./img/wpf0008.png" width=600>
+
+### Log 라이브러리
+- 개발한 앱, 솔루션의 현재상태를 계속 모니터링하는 기능
+- Log 사용법
+    - 직접 코딩 방식
+    - 로그 라이브러리 사용방식
+- Log 라이브러리
+    - NLog
+    - Serilog : 어려움
+    - Log4net
+    - ZLogger
+
+### Log 라이브러리 사용
+1. NuGet패키지 > NLog, NLog.Schema 설치
+2. 새항목 > XML파일 > NLog.config 생성
+3. Info < Debug < Warning < Error
+4. NLog.config 속성 : 항상복사
+5. Debug, Trace는 출력이 안됨
+6. Info, Warn, Error, Fatal 을 사용
+
+    <img src="./img/wpf0009.png" width=600>
+
+### DB연결 CRUD 연습
+1. WPF프로젝트 생성
+2. NuGet 패키지 필요라이브러리 설치
+    - CommunityToolkit.MvvM
+    - MahApps.Metro / MahApps.Metro.IconPacks
+    - MySql.Data
+    - NLog
+3. Models, Views, ViewModels 생성
+4. 초기화
+5. Mainview.xaml, MainViewModel 메인화면 MVVM 작업
+    - 메뉴작업
+    - ContentsControl 추가
+6. 하위 사용자 컨트롤 작업
+    - BookGenre(View, ViewModel)
+    - Books(View, ViewModel)
+7. Models > Genre(DivisionTbl) 모델 작업
+8. BookGenreViewModel DB처리 구현
+
+    <img src="./img/wpf0010.png" width=650>
+
+
+## 4일차
+
+### DB연결 CRUD 연습(계속)
+1. 
+
+#### DB연결 CRUD 연습 시 필요사항
+- [ ] NLog로 각 기능 동작시 로그남기기
+- [ ] DB쿼리 모델로 이전
+- [ ] 연결문자열 Common으로 이전
+- [ ] MahApps.Metro 메시지형태로 변경
+- [ ] 삭제여부 메시지박스 추가
+- [ ] 종료 메뉴아이템
