@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="icons8-book-64.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
@@ -18,9 +22,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\BooksView.xaml.cs">
+    <Compile Update="Views\RentalsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MembersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

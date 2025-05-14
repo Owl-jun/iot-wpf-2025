@@ -24,6 +24,5 @@ namespace WpfBookRentalShop01.Views
         {
             InitializeComponent();
         }
-
     }
 }

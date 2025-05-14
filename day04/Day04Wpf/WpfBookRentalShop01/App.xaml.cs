@@ -1,6 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using MahApps.Metro.Controls.Dialogs;
 using System.Windows;
+using WpfBookRentalShop01.Helpers;
 using WpfBookRentalShop01.ViewModels;
 using WpfBookRentalShop01.Views;
 
@@ -13,9 +13,14 @@ namespace WpfBookRentalShop01
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var viewModel = new MainViewModel();
-            var view = new MainView();
-            view.DataContext = viewModel;
+            Common.DIALOGCOORDINATOR = DialogCoordinator.Instance;
+
+            var viewModel = new MainViewModel(Common.DIALOGCOORDINATOR);
+            var view = new MainView { 
+                DataContext = viewModel 
+            };
+            //var view = new MainView();
+            //view.DataContext = viewModel;
             view.ShowDialog();
         }
     }
