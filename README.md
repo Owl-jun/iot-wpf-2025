@@ -322,7 +322,8 @@ IoT 개발자 WPF 학습리포지토리
 8. 텍스트박스에서 엔터시 이벤트 발생 처리
 9. 텍스트박스 한글 입력 우선 처리
 10. 실행 시 텍스트박스에 포커스 가도록 처리
-
+    
+    https://github.com/user-attachments/assets/ad1bd648-7c2b-4848-a027-fb16fcca14ff
 
 ## 6일차
 
