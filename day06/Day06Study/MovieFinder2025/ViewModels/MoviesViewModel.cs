@@ -65,7 +65,6 @@ namespace MovieFinder2025.ViewModels
         public async Task ViewTrailer()
         {
             if (SelectedMovieItem == null) { await this.dialogCoordinator.ShowMessageAsync(this, "예고편 보기", "영화를 선택하세요."); return; }
-            //32159253455 - hb0p91o8isj7pq2a976f1acqtpcjmut4.apps.googleusercontent.com
             var viewModel = new TrailerViewModel(SelectedMovieItem.Title,Common.DIALOGCOORDINATOR);
             var view = new TrailerView()
             {
@@ -309,7 +308,7 @@ namespace MovieFinder2025.ViewModels
         {
             clearItems();
 
-            string tmdb_apikey = "b6f3cfa101372de6784dd227f907e4a9";
+            string tmdb_apikey = ConfigLoader.LoadApiKey("config2.json");   // TMDB API KEY HERE !!
             string encoding_moviename = HttpUtility.UrlEncode(movieName,Encoding.UTF8);
             string openApiUri = $"https://api.themoviedb.org/3/search/movie?api_key={tmdb_apikey}" +
                                 $"&language=ko-KR&page=1&include_adult=false&query={encoding_moviename}";
