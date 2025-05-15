@@ -11,12 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="config.json" />
     <None Remove="MovieFinderLogo.png" />
     <None Remove="Views\nopicture.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="icons8-movie-64.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

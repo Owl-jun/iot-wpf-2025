@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MahApps.Metro.Controls.Dialogs;
+using MovieFinder2025.Helpers;
 using MovieFinder2025.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -60,7 +62,7 @@ namespace MovieFinder2025.ViewModels
 
         private async Task<YoutubeSearchResult> SearchTrailerFromYoutube()
         {
-            string apiKey = "AIzaSyAluahiUTrbsN7Ipa1UvTAbUmOjWdDOiPE";
+            string apiKey = ConfigLoader.LoadApiKey();  // API KET HERE!
             string url = $"https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q={Uri.EscapeDataString($"{MovieTitle} Official Trailer")}&key={apiKey}";
 
             using (var client = new HttpClient())
@@ -72,6 +74,6 @@ namespace MovieFinder2025.ViewModels
             }
         }
 
-        
+
     }
 }
