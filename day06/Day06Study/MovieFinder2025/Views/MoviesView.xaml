@@ -188,6 +188,7 @@
             </Button>
             <Button Content="예고편 보기" Margin="5,5,15,5" FontSize="12"
                     Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                    Command="{Binding ViewTrailerCommand}"
                     Background="DarkRed"
                     Padding="20,10" BorderBrush="#FF461938">
                 <Button.ContentTemplate>

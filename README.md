@@ -342,3 +342,10 @@ IoT 개발자 WPF 학습리포지토리
     - 시연 영상 (기능 : 즐겨찾기 추가, 삭제, 보기)
       
     https://github.com/user-attachments/assets/25d90f0c-12a2-4072-9967-5bc8a578c166
+
+
+5. Youtube 예고편 보기
+    1. TrailerView, TrailerViewModel
+    2. WPF 기본 WebBrowser 는 구닥다리임
+    3. Nuget 패키지 - Cefsharp.WPF 패키지 설치
+    4. CefSharp.Wpf 설치 시 플랫폼 대상을 AnyCPU -> x64 로 변경해줄 것!

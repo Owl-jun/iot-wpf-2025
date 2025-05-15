@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MahApps.Metro.Controls.Dialogs;
 using MovieFinder2025.Helpers;
 using MovieFinder2025.Models;
+using MovieFinder2025.Views;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using System.Collections.ObjectModel;
@@ -14,6 +15,7 @@ using System.Net.Http.Json;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Web;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace MovieFinder2025.ViewModels
@@ -59,6 +61,20 @@ namespace MovieFinder2025.ViewModels
         #endregion
 
         #region Commands
+        [RelayCommand]
+        public async Task ViewTrailer()
+        {
+            if (SelectedMovieItem == null) { await this.dialogCoordinator.ShowMessageAsync(this, "예고편 보기", "영화를 선택하세요."); return; }
+            //32159253455 - hb0p91o8isj7pq2a976f1acqtpcjmut4.apps.googleusercontent.com
+            var viewModel = new TrailerViewModel(SelectedMovieItem.Title,Common.DIALOGCOORDINATOR);
+            var view = new TrailerView()
+            {
+                DataContext = viewModel
+            };
+            view.Owner = Application.Current.MainWindow;
+            view.ShowDialog();
+
+        }
         [RelayCommand]
         public async Task AddStar()
         {
