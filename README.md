@@ -340,4 +340,5 @@ IoT 개발자 WPF 학습리포지토리
     3. INSERT,UPDATE,DELETE 작업
     
     - 시연 영상 (기능 : 즐겨찾기 추가, 삭제, 보기)
+      
     https://github.com/user-attachments/assets/25d90f0c-12a2-4072-9967-5bc8a578c166
