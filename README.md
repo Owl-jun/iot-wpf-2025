@@ -349,6 +349,10 @@ IoT 개발자 WPF 학습리포지토리
     2. WPF 기본 WebBrowser 는 구닥다리임
     3. Nuget 패키지 - Cefsharp.WPF 패키지 설치
     4. CefSharp.Wpf 설치 시 플랫폼 대상을 AnyCPU -> x64 로 변경해줄 것!
-  
-    https://github.com/user-attachments/assets/1d8c35b1-f0fc-4950-b156-7414fd23f44f
 
+    https://github.com/user-attachments/assets/1d8c35b1-f0fc-4950-b156-7414fd23f44f
+    
+## 7일차
+### 부산광역시 부산맛집 정보앱
+1. [데이터포털](https://www.data.go.kr/) API 신청
+2. WPF 프로젝트 생성
