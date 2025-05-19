@@ -380,3 +380,65 @@ IoT 개발자 WPF 학습리포지토리
 4. 위도(Latitude), 경도(Longitude) 표현
 
     https://github.com/user-attachments/assets/89e7e40e-6f37-4108-81b6-bb70b832d434
+
+### 스마트홈 연동 모니터링 앱
+
+<img src="./img/wpf0022.jpg" width=650>
+
+- 전면부
+
+<img src="./img/wpf0023.jpg" width=650>
+
+- 후면부
+
+- [개발링크](https://github.com/hugoMGSung/hungout-with-arduino/tree/main/SmartHomeDIY)
+
+1. Arduino + Raspberry Pi 스마트홈 기제작
+2. MQTT 데이터전송 기술
+
+### MQTT
+
+<img src="./img/wpf0026.png" width=600>
+
+- Message Queueing Telemetry Transport : 기계간 통신용 경량 메시징 프로토콜
+- Publish / Subscribe
+    - Publish(출간) : 메시지 만들어서 전달
+    - Subscribe(구독) : 필요 메시지 수신받아서 사용
+- 데이터는 휘발성 : 받는 사람이 없으면 날아감
+
+- MQTT를 대체할 기능을 하는 기술
+    - `Redis`, `Kafka`, *RabbitMQ*, ZeroMQ, Socket통신 직접개발
+
+#### MQTT 시뮬레이션 프로젝트 시작
+1. MQTT 브로커 설치
+    - https://mosquitto.org/
+    - 설치 후 서비스에서 서비스 중지
+2. Mosquitto.conf 파일 수정
+    - 관리자 모드로 오픈
+    - listener -> listener 1883
+    - allow_anonymous false -> true
+3. Windows 보안
+    - 방화벽 및 네트워크 보호 > 고급 설정
+4. MQTT Explorer 설치
+    - new Connection 생성, localhost, 1883 저장
+    - connect
+5. VS code 에서 [MqttPub.py](./day08/Pythons/MqttPub.py)
+
+
+
+### 스마트홈 프로젝트 제작
+
+1. 화면 UI 변경
+2. NuGet 패키지
+    - CommunityToolkit.Mvvm
+3. Models, Views, ViewModels 폴더생성
+4. MainWindow 바인딩 처리
+5. MainViewModel에서 바인딩 속성 초기화
+
+    <img src="./img/wpf0025.png" width=650>
+
+## 9일차
+
+### 스마트홈 연동 모니터링앱 계속
+
+#### MQTT 시뮬레이션 계속

@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfSmartHomeApp.MainWindow"
+﻿<Window x:Class="WpfSmartHomeApp.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,6 +8,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:WpfSmartHomeApp.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -15,7 +16,12 @@
         x:Name="window"
         Title="MainWindow" Height="720" Width="1080"
         Dialog:DialogParticipation.Register="{Binding}"
-        Closing="window_Closing">
+        Closing="window_Closing" Loaded="window_Loaded">
+    
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    
     <Border Background="White"
             Padding="30"
             CornerRadius="30" >
@@ -72,7 +78,7 @@
                             Margin="15,0,15,25"
                             VerticalAlignment="Bottom" Click="Button_Click">
                         <Image Source="/Images/_logout.png"
-                               Width="30"/>
+                               Width="30" ToolTip="LogOut"/>
                     </Button>
                 </Grid>
             </Border>
@@ -106,18 +112,32 @@
                                        Text="Owljun's SmartHome"
                                        TextWrapping="Wrap"
                                        Foreground="White" />
-
-                            <TextBlock FontSize="32"
-                                       Foreground="White">
-                                <Run Text="25" /><Run Text="℃"
-                                                      FontWeight="Thin"
-                                                      FontSize="26" />
-                            </TextBlock>
-
-                            <TextBlock Text="Celsius"
-                                       Foreground="White"
-                                       FontSize="12"
-                                       Margin="15,0,0,0" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="32"
+                                           Foreground="White"
+                                           Margin="0,0,45,0">
+                                    <Run Text="{Binding HomeTemp}" Foreground="YellowGreen"/><Run Text="℃"
+                                                FontWeight="Thin"
+                                                FontSize="26" />
+                                </TextBlock>
+                                <TextBlock FontSize="32"
+                                    Foreground="White"
+                                    Margin="0,0,30,0">
+                                    <Run Text="{Binding HomeHumid}" Foreground="DeepSkyBlue"/><Run Text="%"
+                                    FontWeight="Thin"
+                                    FontSize="26" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Temperature"
+                                           Foreground="White"
+                                           FontSize="12"
+                                           Margin="15,0,0,0" />
+                                <TextBlock Text="Humidity"
+                                           Foreground="White"
+                                           FontSize="12"
+                                           Margin="35,0,0,0" />
+                            </StackPanel>
                         </StackPanel>
                         
                         <!-- Panels -->
@@ -139,35 +159,35 @@
                                 <uc:Card Grid.Column="0"
                                          Grid.Row="0"
                                          Margin="0,0,8,8"
-                                         Title="Detection"
+                                         Title="{Binding DetectResult}"
                                          ImageOff="/Images/detect_off.png"
                                          ImageOn="/Images/detect_on.png"
-                                         IsChecked="False"/>
+                                         IsChecked="{Binding IsDetectHuman}"/>
                                 
                                 <!-- Rain Detection -->
                                 <uc:Card Grid.Column="1"
                                          Grid.Row="0"
                                          Margin="0,0,8,8"
-                                         Title="Rain"
+                                         Title="{Binding DetectRain}"
                                          ImageOff="/Images/rain_off.png"
                                          ImageOn="/Images/rain_on.png"
-                                         IsChecked="False"/>
+                                         IsChecked="{Binding IsDetectRain}"/>
 
                                 <uc:Card Grid.Column="0"
                                          Grid.Row="1"
                                          Margin="0,0,8,8"
-                                         Title="Air Conditioner"
+                                         Title="{Binding DetectAirCon}"
                                          ImageOff="/Images/conditioner_off.png"
                                          ImageOn="/Images/conditioner_on.png"
-                                         IsChecked="False" />
+                                         IsChecked="{Binding IsDetectAirCon}" />
 
                                 <uc:Card Grid.Column="1"
                                          Grid.Row="1"
                                          Margin="0,0,8,8"
-                                         Title="Lights"
+                                         Title="{Binding DetectLight}"
                                          ImageOff="/Images/light_off.png"
                                          ImageOn="/Images/light_on.png"
-                                         IsChecked="False" />
+                                         IsChecked="{Binding IsDetectLight}" />
                             </Grid>
                             
                             <!-- Add Button -->
