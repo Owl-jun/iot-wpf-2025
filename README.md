@@ -352,12 +352,31 @@ IoT 개발자 WPF 학습리포지토리
 
     https://github.com/user-attachments/assets/1d8c35b1-f0fc-4950-b156-7414fd23f44f
 
-## 7일차
-### 부산광역시 부산맛집 정보앱
-1. [데이터포털](https://www.data.go.kr/) API 신청
+### 7일차
+
+### 부산광역시 부산맛집 정보 앱
+1. [데이터포털](https://www.data.go.kr/) OpenAPI 신청
+
+    <img src="./image/wpf0020.png" width="600">
+    
 2. WPF 프로젝트 생성
-3. Nuget
-    - CommunityToolkit
-    - CefSharf.wpr.netcore
-    - nlog
-    - mahapps
+3. NuGet 패키지 라이브러리 설치
+    - CommunityToolkit.Mvvm
+    - MahApps.Metro / MahApps.Metro.IconPacks
+    - Newtonsoft.Json
+    - CefSharp.Wpf.NETCore (플랫폼 x64로 변경!)
+    - NLog
+4. MVVM 초기화
+5. UI 디자인 및 구현
+
+    https://github.com/user-attachments/assets/1446dd9e-edb8-4576-b001-d419a2a77e0a
+
+## 8일차
+
+### 부산광역시 부산맛집 정보 앱
+1. 그리드 표현 아이템 조정
+2. 메인창 내용을 구글맵창으로 이동
+3. CefSharp.Wpf로 구글맵지도 표현
+4. 위도(Latitude), 경도(Longitude) 표현
+
+    https://github.com/user-attachments/assets/89e7e40e-6f37-4108-81b6-bb70b832d434
