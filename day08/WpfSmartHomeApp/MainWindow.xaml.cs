@@ -30,6 +30,7 @@ namespace WpfSmartHomeApp
 
         private void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // Alt + F4 , X 버튼 누를때 호출 기능
             e.Cancel = true;
         }
     }
