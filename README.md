@@ -426,6 +426,10 @@ IoT 개발자 WPF 학습리포지토리
 
 
 
+https://github.com/user-attachments/assets/dfb53911-6458-4f67-87de-94e92b78802f
+
+
+
 ### 스마트홈 프로젝트 제작
 
 1. 화면 UI 변경
